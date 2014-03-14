@@ -280,7 +280,7 @@ function debootstrap_target_download
 {
 	# debootstrap destination
 	log_message "running debootstrap --download-only on '${target_dir}'"
-	try_exec $DEBOOTSTRAP --download-only --include=python-software-properties,language-pack-en,plymouth-label ${ubuntu_dist} ${target_dir} ${ubuntu_mirror}
+	try_exec $DEBOOTSTRAP --download-only --components=main,restricted,universe,multiverse --arch=${debootstrap_arch} --include=python-software-properties,language-pack-en,plymouth-label ${ubuntu_dist} ${target_dir} ${ubuntu_mirror}
 	if [ ! $? -eq 0 ]; then
 		return $EXEC_RETURN
 	fi
@@ -304,7 +304,7 @@ function debootstrap_target
 {
 	# debootstrap destination
 	log_message "running debootstrap on '${target_dir}'"
-	try_exec $DEBOOTSTRAP --include=python-software-properties,language-pack-en,plymouth-label ${ubuntu_dist} ${target_dir} ${ubuntu_mirror}
+	try_exec $DEBOOTSTRAP --components=main,restricted,universe,multiverse --arch=${debootstrap_arch} --include=python-software-properties,language-pack-en,plymouth-label ${ubuntu_dist} ${target_dir} ${ubuntu_mirror}
 	
 	return $EXEC_RETURN
 }
